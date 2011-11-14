@@ -1,6 +1,6 @@
 # Cavalcade
 
-a lightweight infrastructure for using [Resque]("https://github.com/defunkt/resque") as a stand-alone job queue
+a lightweight infrastructure for using [Resque](https://github.com/defunkt/resque) as a stand-alone job queue
 
 ## Overview
 
