@@ -18,7 +18,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/freerobby/cavalcade"
   gem.license = "MIT"
   gem.summary = %Q{a lightweight infrastructure for using Resque as a stand-alone job queue}
-  gem.description = %Q{Github built resque to perform background jobs for the github web app. It has gained a large following in the Ruby community for running out-of-process jobs in all sorts of web apps. But Resque can be very useful outside of a web app, too. What if you want to write jobs in Ruby and just enqueue them from your console? Or from a Java application? Or in cron jobs? Cavalcade to the Resque! Cavalcade creates a Resque-based, stand-alone job queue, and provides rake tasks to enqueue all of your jobs.}
+  gem.description = %Q{Resque can be very useful outside of a web app, too. What if you want to write jobs in Ruby and just enqueue them from your console? Or from a Java application? Or in cron jobs? Cavalcade to the resque! Cavalcade creates a resque-based, stand-alone job queue, and provides rake tasks to enqueue all of your jobs.}
   gem.email = "robby@freerobby.com"
   gem.authors = ["Robby Grossman"]
   # dependencies defined in Gemfile
