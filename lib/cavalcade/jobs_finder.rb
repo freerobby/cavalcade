@@ -12,5 +12,4 @@ module Cavalcade
       classes
     end
   end
-
 end

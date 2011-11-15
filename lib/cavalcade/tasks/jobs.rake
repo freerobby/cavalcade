@@ -1,7 +1,7 @@
 require "resque/tasks"
 require "active_support/inflector" # #underscore used to convert ClassName to class_name
 
-require "./lib/cavalcade"
+require "cavalcade"
 
 namespace :cavalcade do
   namespace :jobs do

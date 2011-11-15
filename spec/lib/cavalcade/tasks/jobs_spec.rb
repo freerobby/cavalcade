@@ -1,4 +1,4 @@
-require "#{File.dirname(__FILE__)}/../../spec_helper"
+require "#{File.dirname(__FILE__)}/../../../spec_helper"
 
 require "rake"
 
@@ -9,7 +9,7 @@ describe "jobs.rake" do
     class SomeLongClassName < Cavalcade::Job; end
     Cavalcade::JobsFinder.stub!(:defined_jobs).and_return([File1, SomeClass, SomeLongClassName])
     Rake.application = Rake::Application.new
-    load "lib/tasks/jobs.rake"
+    require "cavalcade/tasks"
     tasks = Rake.application.tasks.map{|t| t.name}
     tasks.should include("cavalcade:jobs:file1:enqueue")
     tasks.should include("cavalcade:jobs:some_class:enqueue")

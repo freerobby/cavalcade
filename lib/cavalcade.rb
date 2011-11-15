@@ -1,2 +1,2 @@
-require "job"
-require "jobs_finder"
+require "cavalcade/job"
+require "cavalcade/jobs_finder"

@@ -1,4 +1,4 @@
-require "#{File.dirname(__FILE__)}/../spec_helper"
+require "#{File.dirname(__FILE__)}/../../spec_helper"
 
 describe Cavalcade::JobsFinder do
   describe "#self.defined_jobs" do
