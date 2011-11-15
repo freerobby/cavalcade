@@ -8,7 +8,11 @@ Github built Resque to perform background jobs for the github web app. It has ga
 
 But Resque can be very useful outside of a web app, too. What if you want to write jobs in Ruby and just enqueue them from your console? Or from a Java application? Or in cron jobs? Cavalcade to the Resque!
 
-Cavalcade creates a Resque-based, stand-alone job queue, and provides an executable to enqueue all of your jobs.
+Cavalcade creates a Resque-based, stand-alone job queue, and provides an executable to manage and enqueue all of your jobs.
+
+## Philosophy
+
+Cavalcade is *not* a wrapper around Resque. In fact, it makes a point of *not* obfuscating or overriing any of Resque's native functionality. Any job that you write for Cavalcade can be used interchangeably with any app that uses Resque. Think of Cavalcade as minimalist piping that lets you get started writing jobs quickly.
 
 ## Contributing to Cavalcade
  
