@@ -1,2 +1,2 @@
-require "./lib/job"
-require "./lib/jobs_finder"
+require "job"
+require "jobs_finder"
