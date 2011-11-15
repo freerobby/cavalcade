@@ -14,6 +14,10 @@ Cavalcade creates a Resque-based, stand-alone job queue, and provides an executa
 
 Cavalcade is *not* a wrapper around Resque. In fact, it makes a point of *not* obfuscating or overriing any of Resque's native functionality. Any job that you write for Cavalcade can be used interchangeably with any app that uses Resque. Think of Cavalcade as minimalist piping that lets you get started writing jobs quickly.
 
+## Getting Started
+
+The quickest way to get started is to fork the [Cavalcade Demo Project](https://github.com/freerobby/cavalcade-demo) and start adding your own Jobs. The demo project [README](https://github.com/freerobby/cavalcade-demo/blob/master/README.md) contains a detailed tutorial.
+
 ## Contributing to Cavalcade
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
