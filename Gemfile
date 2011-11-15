@@ -1,5 +1,6 @@
 source "http://rubygems.org"
 
+gem "rake" # Needed by resque to start workers
 gem "resque", "~> 1.19"
 gem "trollop", "~> 1.16"
 
