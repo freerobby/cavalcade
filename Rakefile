@@ -21,6 +21,7 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{Resque can be very useful outside of a web app, too. What if you want to write jobs in Ruby and just enqueue them from your console? Or from a Java application? Or in cron jobs? Cavalcade to the resque! Cavalcade creates a resque-based, stand-alone job queue, and provides rake tasks to enqueue all of your jobs.}
   gem.email = "robby@freerobby.com"
   gem.authors = ["Robby Grossman"]
+  gem.executables = ["cavalcade"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new

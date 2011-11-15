@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.date = "2011-11-15"
   s.description = "Resque can be very useful outside of a web app, too. What if you want to write jobs in Ruby and just enqueue them from your console? Or from a Java application? Or in cron jobs? Cavalcade to the resque! Cavalcade creates a resque-based, stand-alone job queue, and provides rake tasks to enqueue all of your jobs."
   s.email = "robby@freerobby.com"
+  s.executables = ["cavalcade"]
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.md"
@@ -26,15 +27,14 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "VERSION",
+    "bin/cavalcade",
     "cavalcade.gemspec",
     "lib/cavalcade.rb",
     "lib/cavalcade/job.rb",
     "lib/cavalcade/jobs_finder.rb",
-    "lib/cavalcade/tasks.rb",
-    "lib/cavalcade/tasks/jobs.rake",
+    "spec/bin/cavalcade_spec.rb",
     "spec/lib/cavalcade/job_spec.rb",
     "spec/lib/cavalcade/jobs_finder_spec.rb",
-    "spec/lib/cavalcade/tasks/jobs_spec.rb",
     "spec/spec_helper.rb"
   ]
   s.homepage = "http://github.com/freerobby/cavalcade"
@@ -47,27 +47,21 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<activesupport>, [">= 2.3.2"])
-      s.add_runtime_dependency(%q<i18n>, [">= 0"])
-      s.add_runtime_dependency(%q<rake>, [">= 0.9"])
       s.add_runtime_dependency(%q<resque>, ["~> 1.19"])
+      s.add_runtime_dependency(%q<trollop>, ["~> 1.16"])
       s.add_development_dependency(%q<rspec>, ["~> 2.6"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6.4"])
     else
-      s.add_dependency(%q<activesupport>, [">= 2.3.2"])
-      s.add_dependency(%q<i18n>, [">= 0"])
-      s.add_dependency(%q<rake>, [">= 0.9"])
       s.add_dependency(%q<resque>, ["~> 1.19"])
+      s.add_dependency(%q<trollop>, ["~> 1.16"])
       s.add_dependency(%q<rspec>, ["~> 2.6"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
     end
   else
-    s.add_dependency(%q<activesupport>, [">= 2.3.2"])
-    s.add_dependency(%q<i18n>, [">= 0"])
-    s.add_dependency(%q<rake>, [">= 0.9"])
     s.add_dependency(%q<resque>, ["~> 1.19"])
+    s.add_dependency(%q<trollop>, ["~> 1.16"])
     s.add_dependency(%q<rspec>, ["~> 2.6"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.6.4"])

@@ -1,0 +1,64 @@
+#!/usr/bin/env ruby
+
+require "rubygems"
+require "cavalcade"
+require "resque"
+require "trollop"
+
+SUBCOMMANDS = %w(enqueue list-jobs)
+
+global_opts = Trollop::options do
+  banner "Usage: cavalcade SUBCOMMAND [options]"
+  banner "Available subcommands: #{SUBCOMMANDS.join(", ")}"
+  stop_on SUBCOMMANDS
+end
+
+subcommand = ARGV.shift
+subcommand_opts = case subcommand
+when nil
+  Trollop::die "No subcommand specified."
+when "enqueue"
+  Trollop::options do
+    banner "Usage: cavalcade enqueue [options]"
+    opt :environment, "Ruby file that loads your environment", :type => String, :default => "environment.rb"
+    opt :job, "Class name of the job to enqueue", :type => String
+    opt :params, "Ruby parameters to pass to job", :type => String
+  end
+when "list-jobs"
+  Trollop::options do
+    banner "Usage: cavalcade list-jobs [options]"
+    opt :environment, "Ruby file that loads your environment", :type => String, :default => "environment.rb"
+  end
+else
+  Trollop::die "Unknown subcommand: #{subcommand.inspect}"
+end
+
+class Helpers
+  def self.load_environment(file_path)
+    begin
+      require file_path
+    rescue LoadError => e
+      if e.message.include?(file_path)
+        Trollop::die "Unable to load #{file_path}"
+      else
+        raise e
+      end
+    end
+  end
+end
+
+case subcommand
+when "enqueue"
+  Helpers.load_environment(subcommand_opts[:environment])
+  # Use string comparison instead of class comparison so we don't have to handle exceptions if a bad class is supplied
+  if Cavalcade::JobsFinder.defined_jobs.map{|j| j.to_s}.include?(subcommand_opts[:job])
+    eval("Resque.enqueue(#{subcommand_opts[:job]}, #{subcommand_opts[:params]})")
+    $stderr.puts "Enqueued job: #{subcommand_opts[:job]}.perform(#{subcommand_opts[:params]})"
+  else
+    Trollop::die "Job not found: #{subcommand_opts[:job]}. Verify you are using the correct environment file, and use list-jobs to verify your job is available."
+  end
+when "list-jobs"
+  Helpers.load_environment(subcommand_opts[:environment])
+  $stderr.puts "Available jobs: #{Cavalcade::JobsFinder.defined_jobs.sort.join(", ")}"
+  $stderr.puts "Missing jobs? Be sure they are in your environment.rb."
+end
