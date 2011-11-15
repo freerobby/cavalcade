@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 
 gem "activesupport", ">= 2.3.2"
+gem "i18n" # ActiveSupport screws up its dependencies, so adding this manually (version-agnostic) so that bad versions of activesupport will still work.
 gem "rake", ">= 0.9"
 gem "resque", "~> 1.19"
 
