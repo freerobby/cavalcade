@@ -53,7 +53,7 @@ when "enqueue"
   Helpers.load_environment(subcommand_opts[:environment])
   # Use string comparison instead of class comparison so we don't have to handle exceptions if a bad class is supplied
   if Cavalcade::JobsFinder.defined_jobs.map{|j| j.to_s}.include?(subcommand_opts[:job])
-    params_to_append = subcommand_opts[:params].nil? ? "" : ", #{subcommand_opts[:params]})"
+    params_to_append = subcommand_opts[:params].nil? ? "" : ", #{subcommand_opts[:params]}"
     subcommand_opts[:num_times].times do
       eval("Resque.enqueue(#{subcommand_opts[:job]}#{params_to_append})")
     end
