@@ -23,6 +23,7 @@ when "enqueue"
     opt :environment, "Ruby file that loads your environment", :type => String, :default => "environment.rb"
     opt :job, "Class name of the job to enqueue", :type => String
     opt :params, "Ruby parameters to pass to job", :type => String
+    opt :num_times, "Number of times to enqueue the job", :type => Integer, :default => 1
   end
 when "list-jobs"
   Trollop::options do
@@ -52,8 +53,12 @@ when "enqueue"
   Helpers.load_environment(subcommand_opts[:environment])
   # Use string comparison instead of class comparison so we don't have to handle exceptions if a bad class is supplied
   if Cavalcade::JobsFinder.defined_jobs.map{|j| j.to_s}.include?(subcommand_opts[:job])
-    eval("Resque.enqueue(#{subcommand_opts[:job]}, #{subcommand_opts[:params]})")
-    $stderr.puts "Enqueued job: #{subcommand_opts[:job]}.perform(#{subcommand_opts[:params]})"
+    params_to_append = subcommand_opts[:params].nil? ? "" : ", #{subcommand_opts[:params]})"
+    subcommand_opts[:num_times].times do
+      eval("Resque.enqueue(#{subcommand_opts[:job]}#{params_to_append})")
+    end
+    times_text = subcommand_opts[:num_times] == 1 ? "" : " #{subcommand_opts[:num_times]} times"
+    $stderr.puts "Enqueued job: #{subcommand_opts[:job]}.perform(#{subcommand_opts[:params]})#{times_text}"
   else
     Trollop::die "Job not found: #{subcommand_opts[:job]}. Verify you are using the correct environment file, and use list-jobs to verify your job is available."
   end
