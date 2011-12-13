@@ -64,6 +64,6 @@ when "enqueue"
   end
 when "list-jobs"
   Helpers.load_environment(subcommand_opts[:environment])
-  $stderr.puts "Available jobs: #{Cavalcade::JobsFinder.defined_jobs.sort.join(", ")}"
+  $stderr.puts "Available jobs: #{Cavalcade::JobsFinder.defined_jobs.sort{|a,b| a.to_s <=> b.to_s}.join(", ")}"
   $stderr.puts "Missing jobs? Be sure they are in your environment.rb."
 end
