@@ -54,11 +54,13 @@ when "enqueue"
   # Use string comparison instead of class comparison so we don't have to handle exceptions if a bad class is supplied
   if Cavalcade::JobsFinder.defined_jobs.map{|j| j.to_s}.include?(subcommand_opts[:job])
     params_to_append = subcommand_opts[:params].nil? ? "" : ", #{subcommand_opts[:params]}"
+    last_result = nil
     subcommand_opts[:num_times].times do
-      eval("Resque.enqueue(#{subcommand_opts[:job]}#{params_to_append})")
+      last_result = eval("Resque.enqueue(#{subcommand_opts[:job]}#{params_to_append})")
     end
     times_text = subcommand_opts[:num_times] == 1 ? "" : " #{subcommand_opts[:num_times]} times"
     $stderr.puts "Enqueued job: #{subcommand_opts[:job]}.perform(#{subcommand_opts[:params]})#{times_text}"
+    $stderr.puts "Errors encountered during enqueue. Last enqueue returned: #{last_result}" unless last_result == true
   else
     Trollop::die "Job not found: #{subcommand_opts[:job]}. Verify you are using the correct environment file, and use list-jobs to verify your job is available."
   end
