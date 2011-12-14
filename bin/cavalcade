@@ -60,7 +60,7 @@ when "enqueue"
     end
     times_text = subcommand_opts[:num_times] == 1 ? "" : " #{subcommand_opts[:num_times]} times"
     $stderr.puts "Enqueued job: #{subcommand_opts[:job]}.perform(#{subcommand_opts[:params]})#{times_text}"
-    $stderr.puts "Errors encountered during enqueue. Last enqueue returned: #{last_result}" unless last_result == true
+    $stderr.puts "Errors encountered during enqueue. Last enqueue returned: #{last_result.inspect}" unless last_result
   else
     Trollop::die "Job not found: #{subcommand_opts[:job]}. Verify you are using the correct environment file, and use list-jobs to verify your job is available."
   end
