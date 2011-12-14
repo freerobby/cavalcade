@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "cavalcade"
-  s.version = "1.0.3"
+  s.version = "1.0.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Robby Grossman"]
-  s.date = "2011-12-13"
+  s.date = "2011-12-14"
   s.description = "Resque can be very useful outside of a web app, too. What if you want to write jobs in Ruby and just enqueue them from your console? Or from a Java application? Or in cron jobs? Cavalcade to the resque! Cavalcade creates a resque-based, stand-alone job queue, and provides rake tasks to enqueue all of your jobs."
   s.email = "robby@freerobby.com"
   s.executables = ["cavalcade"]
